@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 const Home = () => {
   const [tab, setTab] = useState(1);
@@ -10,8 +11,7 @@ const Home = () => {
 
   const handleTask = (e) => {
     e.preventDefault();
-    console.log(task);
-    setTask(''); 
+    axios.post('http://localhost:5000/addTask', {task})
   };
 
   return (
@@ -31,7 +31,7 @@ const Home = () => {
           />
           <button 
             onClick={handleTask} 
-            className="ml-4 bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition duration-200"
+            className="ml-4 bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition duration-200 cursor-pointer"
           >
             ADD
           </button>
