@@ -1,0 +1,38 @@
+# Node modules
+/node_modules/
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+
+# Dependency directories
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build directories
+/dist
+/build
+
+# Optional: Ignore any system files that may be specific to your development environment
+.DS_Store
+Thumbs.db
+
+# VSCode settings (if you're using VSCode)
+.vscode/
+
+# IDE-specific files
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS-specific files
+*.swp
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
