@@ -27,7 +27,7 @@ Thumbs.db
 # IDE-specific files
 .idea/
 *.sublime-workspace
-*.sublime-project
+*.sublime-projectcl
 
 # OS-specific files
 *.swp
