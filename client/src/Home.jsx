@@ -1,9 +1,11 @@
-import { useState } from "react";
+/* eslint-disable react/jsx-key */
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Home = () => {
   const [tab, setTab] = useState(1);
   const [task, setTask] = useState("");
+  const [todos, setTodos] = useState(null);
 
   const handleClick = (tabNumber) => {
     setTab(tabNumber);
@@ -13,6 +15,12 @@ const Home = () => {
     e.preventDefault();
     axios.post("http://localhost:5000/addTask", { task });
   };
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/read-tasks").then(res => {
+      setTodos(res.data);
+    })
+  }, []);
 
   return (
     <div className="bg-gray-50 w-screen h-screen flex justify-center items-center">
@@ -64,26 +72,36 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="space-y-4">
-          <div className="flex justify-between bg-gray-50 p-4 rounded-md shadow-sm">
-            <div>
-              <p className="text-lg font-semibold">Do something</p>
-              <p className="text-sm text-gray-500">Date today</p>
-              <p className="text-sm text-green-500">Status: Active</p>
-            </div>
-            <div className="flex flex-col items-start space-y-2">
-              <button className="text-blue-600 hover:text-blue-800 cursor-pointer">
-                Edit
-              </button>
-              <button className="text-red-600 hover:text-red-800 cursor-pointer">
-                Delete
-              </button>
-              <button className="text-green-600 hover:text-green-800 cursor-pointer">
-                Completed
-              </button>
-            </div>
-          </div>
-        </div>
+        {
+          todos.map(todo => (
+              <div className="space-y-4">
+                <div className="flex justify-between bg-gray-50 p-4 rounded-md shadow-sm mb-2">
+                  <div>
+                    <p className="text-lg font-semibold">{todo.task}</p>
+                  <p className="text-sm text-gray-500">{todo.createdAt}</p>
+                    <p className="text-sm text-green-500">Status: Active</p>
+                  </div>
+                  <div className="flex flex-col items-start space-y-2">
+                    <button className="text-blue-600 hover:text-blue-800 cursor-pointer">
+                      Edit
+                    </button>
+                    <button className="text-red-600 hover:text-red-800 cursor-pointer">
+                      Delete
+                    </button>
+                    <button className="text-green-600 hover:text-green-800 cursor-pointer">
+                      Completed
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )
+          )
+        }
+
+        
+        
+       
+        
       </div>
     </div>
   );

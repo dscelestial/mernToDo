@@ -43,7 +43,7 @@ app.get('/read-tasks', (req, res) => {
             console.log("failed to read tasks")
         }else{
             console.log("read tasks successfully")
-            console.log(result);
+            res.send(result)
         }
     })
 })
