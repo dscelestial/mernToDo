@@ -36,6 +36,18 @@ app.post('/addTask', (req,res) => {
     }
 })
 
+app.get('/read-tasks', (req, res) => {
+    const q = 'SELECT * from merntodo';
+    db.query(q, (err, result) => {
+        if(err){
+            console.log("failed to read tasks")
+        }else{
+            console.log("read tasks successfully")
+            console.log(result);
+        }
+    })
+})
+
 app.listen(5000, () => {
     console.log('Server started!')
 })
