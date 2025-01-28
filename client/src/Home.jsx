@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -17,6 +18,7 @@ const Home = () => {
 
   useEffect(() => {
     axios.get("http://localhost:5000/read-tasks").then(res => {
+      console.log(res.data);
       setTodos(res.data);
     })
   }, []);
@@ -72,12 +74,12 @@ const Home = () => {
         </div>
 
         {
-          todos.map(todo => (
-              <div key={todo.id} className="space-y-4">
+          todos.map(todo => 
+            <div key={todo.id} className="space-y-4">
                 <div className="flex justify-between bg-gray-50 p-4 rounded-md shadow-sm mb-2">
                   <div>
                     <p className="text-lg font-semibold">{todo.task}</p>
-                  <p className="text-sm text-gray-500">{todo.createdAt}</p>
+                  <p className="text-sm text-gray-500">{todo.createAt}</p>
                     <p className="text-sm text-green-500">Status: Active</p>
                   </div>
                   <div className="flex flex-col items-start space-y-2">
@@ -93,14 +95,8 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            )
           )
         }
-
-        
-        
-       
-        
       </div>
     </div>
   );
