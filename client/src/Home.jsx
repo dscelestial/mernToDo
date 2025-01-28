@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -74,7 +73,7 @@ const Home = () => {
 
         {
           todos.map(todo => (
-              <div className="space-y-4">
+              <div key={todo.id} className="space-y-4">
                 <div className="flex justify-between bg-gray-50 p-4 rounded-md shadow-sm mb-2">
                   <div>
                     <p className="text-lg font-semibold">{todo.task}</p>
