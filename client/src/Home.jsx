@@ -79,8 +79,8 @@ const Home = () => {
                 <div className="flex justify-between bg-gray-50 p-4 rounded-md shadow-sm mb-2">
                   <div>
                     <p className="text-lg font-semibold">{todo.task}</p>
-                  <p className="text-sm text-gray-500">{todo.createAt}</p>
-                    <p className="text-sm text-green-500">Status: Active</p>
+                  <p className="text-sm text-gray-500">{new Date(todo.createdAt).toLocaleDateString()}</p>
+                    <p className="text-sm text-green-500">Status: {(todo.status) === 1? 'Active' : 'Inactive'}</p>
                   </div>
                   <div className="flex flex-col items-start space-y-2">
                     <button className="text-blue-600 hover:text-blue-800 cursor-pointer">

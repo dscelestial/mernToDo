@@ -26,14 +26,14 @@ db.connect((err) => {
 app.post('/addTask', (req,res) => {
     console.log(req.body);
     const q = 'insert into merntodo (task, createdAt) values (?, ?)';
-    db.query(q, [req.body.task, new Date()]), (err, result) => {
-        if(err){
+    db.query(q, [req.body.task, new Date()], (err, result) => {
+        if (err) {
             console.log(err);
-        }
-        else{
+        } else {
             console.log('To do saved');
         }
-    }
+    });
+    
 })
 
 app.get('/read-tasks', (req, res) => {
