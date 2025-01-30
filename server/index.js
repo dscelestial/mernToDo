@@ -25,15 +25,18 @@ db.connect((err) => {
 
 app.post('/addTask', (req,res) => {
     console.log(req.body);
-    const q = 'insert into merntodo (task, createdAt) values (?, ?)';
-    db.query(q, [req.body.task, new Date()], (err, result) => {
+    const q = 'insert into merntodo (task, createdAt, status) values (?, ?, ?)';
+    db.query(q, [req.body.task, new Date(), "Active"], (err, result) => {
         if (err) {
             console.log(err);
         } else {
             console.log('To do saved');
+            const updatedTasks = 'SELECT * FROM merntodo';
+            db.query(updatedTasks, (error, newList) => {
+                res.send(newList)
+            })
         }
     });
-    
 })
 
 app.get('/read-tasks', (req, res) => {

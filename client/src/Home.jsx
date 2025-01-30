@@ -13,7 +13,11 @@ const Home = () => {
 
   const handleTask = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/addTask", { task });
+    axios.post("http://localhost:5000/addTask", { task }).then(res => {
+      setTodos(res.data);
+      setTask("");
+    });
+
   };
 
   useEffect(() => {
