@@ -5,7 +5,7 @@ import axios from "axios";
 const Home = () => {
   const [tab, setTab] = useState(1);
   const [task, setTask] = useState("");
-  const [todos, setTodos] = useState(null);
+  const [todos, setTodos] = useState([]);
 
   const handleClick = (tabNumber) => {
     setTab(tabNumber);
@@ -22,6 +22,14 @@ const Home = () => {
       setTodos(res.data);
     })
   }, []);
+
+  // const todos = [
+  //   {
+  //     "task" : "TASK1",
+  //     "createdAt": "2024/01/01",
+  //     "status": "active",
+  //   }
+  // ]
 
   return (
     <div className="bg-gray-50 w-screen h-screen flex justify-center items-center">
