@@ -88,7 +88,7 @@ const Home = () => {
                   <div>
                     <p className="text-lg font-semibold">{todo.task}</p>
                   <p className="text-sm text-gray-500">{new Date(todo.createdAt).toLocaleDateString()}</p>
-                    <p className="text-sm text-green-500">Status: {(todo.status) === 1? 'Active' : 'Inactive'}</p>
+                    <p className={`text-sm ${todo.status === "Active" ? "text-green-500" : "text-gray-500"}`}>Status: { todo.status }</p>
                   </div>
                   <div className="flex flex-col items-start space-y-2">
                     <button className="text-blue-600 hover:text-blue-800 cursor-pointer">
