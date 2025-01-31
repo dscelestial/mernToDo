@@ -17,23 +17,13 @@ const Home = () => {
       setTodos(res.data);
       setTask("");
     });
-
   };
 
   useEffect(() => {
     axios.get("http://localhost:5000/read-tasks").then(res => {
-      console.log(res.data);
       setTodos(res.data);
     })
   }, []);
-
-  // const todos = [
-  //   {
-  //     "task" : "TASK1",
-  //     "createdAt": "2024/01/01",
-  //     "status": "active",
-  //   }
-  // ]
 
   return (
     <div className="bg-gray-50 w-screen h-screen flex justify-center items-center">
@@ -59,18 +49,10 @@ const Home = () => {
         </div>
 
         <div className="flex justify-evenly mb-6">
-          <p
-            className={`${
-              tab === 1 ? "text-blue-600 underline" : "text-gray-600"
-            } cursor-pointer hover:text-blue-600`}
-            onClick={() => handleClick(1)}
-          >
+          <p className={`${tab === 1 ? "text-blue-600 underline" : "text-gray-600"} cursor-pointer hover:text-blue-600`} onClick={() => handleClick(1)}>
             All
           </p>
-          <p
-            className={`${
-              tab === 2 ? "text-blue-600 underline" : "text-gray-600"
-            } cursor-pointer hover:text-blue-600`}
+          <p className={`${tab === 2 ? "text-blue-600 underline" : "text-gray-600"} cursor-pointer hover:text-blue-600`}
             onClick={() => handleClick(2)}
           >
             Active
