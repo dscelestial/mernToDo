@@ -1,4 +1,4 @@
-import addTask from './routes.js';
+import {addTask, getTask} from './routes.js';
 import express from 'express';
 import cors from 'cors';
 import mysql from 'mysql2';
@@ -26,18 +26,7 @@ db.connect((err) => {
 
 
 app.post('/addTask', addTask)
-
-app.get('/read-tasks', (req, res) => {
-    const q = 'SELECT * from merntodo';
-    db.query(q, (err, result) => {
-        if(err){
-            console.log("failed to read tasks")
-        }else{
-            console.log("read tasks successfully")
-            res.send(result)
-        }
-    })
-})
+app.get('/read-tasks', getTask)
 
 app.listen(5000, () => {
     console.log('Server started!')

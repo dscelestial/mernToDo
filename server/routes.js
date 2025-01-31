@@ -9,7 +9,19 @@ const db = mysql.createConnection({
 
 db.connect;
 
-export default function addTask(req,res) {
+export const getTask = (req, res) => {
+    const q = 'SELECT * from merntodo';
+    db.query(q, (err, result) => {
+        if(err){
+            console.log("failed to read tasks")
+        }else{
+            console.log("read tasks successfully")
+            res.send(result)
+        }
+    })
+}
+
+export const addTask = (req,res) => {
     console.log(req.body);
     const q = 'insert into merntodo (task, createdAt, status) values (?, ?, ?)';
     db.query(q, [req.body.task, new Date(), "Active"], (err, result) => {
