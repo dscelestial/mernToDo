@@ -1,7 +1,9 @@
-const express = require('express');
-const cors = require('cors');
+import addTask from './routes.js';
+import express from 'express';
+import cors from 'cors';
+import mysql from 'mysql2';
+
 const app = express();
-const mysql = require('mysql2');
 
 app.use(express.json());
 app.use(cors());
@@ -23,21 +25,7 @@ db.connect((err) => {
 })
 
 
-app.post('/addTask', (req,res) => {
-    console.log(req.body);
-    const q = 'insert into merntodo (task, createdAt, status) values (?, ?, ?)';
-    db.query(q, [req.body.task, new Date(), "Active"], (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('To do saved');
-            const updatedTasks = 'SELECT * FROM merntodo';
-            db.query(updatedTasks, (error, newList) => {
-                res.send(newList)
-            })
-        }
-    });
-})
+app.post('/addTask', addTask)
 
 app.get('/read-tasks', (req, res) => {
     const q = 'SELECT * from merntodo';
