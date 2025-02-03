@@ -25,6 +25,10 @@ const Home = () => {
     })
   }, []);
 
+  const handleEdit = (id) => {
+    console.log(`Editing now! ${id}`);
+  }
+
   return (
     <div className="bg-gray-50 w-screen h-screen flex justify-center items-center">
       <div className="w-full max-w-lg p-6 bg-white rounded-lg shadow-lg">
@@ -33,17 +37,9 @@ const Home = () => {
         </div>
 
         <div className="flex justify-between mb-4">
-          <input
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
-            className="bg-gray-100 p-3 w-full rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400"
-            type="text"
-            placeholder="Enter task"
-          />
-          <button
-            onClick={handleTask}
-            className="ml-4 bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition duration-200 cursor-pointer"
-          >
+          <input value={task} onChange={(e) => setTask(e.target.value)} className="bg-gray-100 p-3 w-full rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400" type="text"
+            placeholder="Enter task"/>
+          <button onClick={handleTask} className="ml-4 bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition duration-200 cursor-pointer">
             ADD
           </button>
         </div>
@@ -77,7 +73,7 @@ const Home = () => {
                     <p className={`text-sm ${todo.status === "Active" ? "text-green-500" : "text-gray-500"}`}>Status: { todo.status }</p>
                   </div>
                   <div className="flex flex-col items-start space-y-2">
-                    <button className="text-blue-600 hover:text-blue-800 cursor-pointer">
+                    <button onClick={() => {handleEdit(todo.id)}} className="text-blue-600 hover:text-blue-800 cursor-pointer">
                       Edit
                     </button>
                     <button className="text-red-600 hover:text-red-800 cursor-pointer">
