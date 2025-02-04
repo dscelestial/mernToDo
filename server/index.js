@@ -6,12 +6,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-
 app.post('/addTask', addTask)
 app.get('/read-tasks', getTask)
 app.post('/update-task', (req, res) => {
     console.log(req.body);
-    res.send({message: "Task updated!"});
 })
 
 app.listen(5000, () => {

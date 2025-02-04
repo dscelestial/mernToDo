@@ -37,8 +37,9 @@ const Home = () => {
 
   const handleUpdate = async () => {
     console.log("Task updated click!");
-    const result = await axios.post("http://localhost:5000/update-task", {updatedId, updatedTask});
-    console.log(result);
+    setIsEditing(false);
+    setTask("");
+    await axios.post("http://localhost:5000/update-task", {updatedId, updatedTask});
   }
 
   return (
