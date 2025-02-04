@@ -7,6 +7,8 @@ const Home = () => {
   const [task, setTask] = useState("");
   const [todos, setTodos] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [updatedId, setUpdatedId] = useState("");
+  const [updatedTask, setUpdatedTask] = useState("");
 
   const handleClick = (tabNumber) => {
     setTab(tabNumber);
@@ -28,9 +30,16 @@ const Home = () => {
 
   const handleEdit = (id, task) => {
     setTask(task);
-    console.log(`Editing now! ${id}`);
-    setIsEditing(true);
+    setIsEditing(true); 
+    setUpdatedId(id);
+    setUpdatedTask(task);
   };
+
+  const handleUpdate = async () => {
+    console.log("Task updated click!");
+    const result = await axios.post("http://localhost:5000/update-task", {updatedId, updatedTask});
+    console.log(result);
+  }
 
   return (
     <div className="bg-gray-50 w-screen h-screen flex justify-center items-center">
@@ -47,10 +56,7 @@ const Home = () => {
             type="text"
             placeholder="Enter task"
           />
-          <button
-            onClick={handleTask}
-            className="ml-4 bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition duration-200 cursor-pointer"
-          >
+          <button onClick={isEditing ? handleUpdate : handleTask} className="ml-4 bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition duration-200 cursor-pointer">
             {isEditing ? "UPDATE" : "ADD"}
           </button>
         </div>
