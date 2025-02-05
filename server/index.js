@@ -1,4 +1,4 @@
-import {addTask, getTask} from './routes.js';
+import {addTask, getTask, updateTask} from './routes.js';
 import express from 'express';
 import cors from 'cors';
 
@@ -8,9 +8,7 @@ app.use(cors());
 
 app.post('/addTask', addTask)
 app.get('/read-tasks', getTask)
-app.post('/update-task', (req, res) => {
-    console.log(req.body);
-})
+app.post('/update-task', updateTask)
 
 app.listen(5000, () => {
     console.log('Server started on PORT 5000!')

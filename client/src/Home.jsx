@@ -28,36 +28,35 @@ const Home = () => {
     });
   }, []);
 
-  useEffect( () => {
-    const dummyData = async () => {
-      try{
-        const result = await axios.post("https://reqres.in/api/users", {
-          "name": `${task}`,
-          "job": "Task!",
-        });
-        console.log(result.data);
-      } catch(error){
-        console.log(error);        
-      }
-    } 
-    dummyData();
-  }, [task]);
+  // useEffect( () => {
+  //   const dummyData = async () => {
+  //     try{
+  //       const result = await axios.post("https://reqres.in/api/users", {
+  //         "name": `${task}`,
+  //         "job": "Task!",
+  //       });
+  //       console.log(result.data);
+  //     } catch(error){
+  //       console.log(error);        
+  //     }
+  //   } 
+  //   dummyData();
+  // }, [task]);
 
   const handleEdit = (id, task) => {
     setTask(task);
     setIsEditing(true);
     setUpdatedId(id);
     setUpdatedTask(task);
-    console.log(updatedId, updatedTask);
   };
 
   const handleUpdate = async () => {
-    console.log("Task updated click!");
     setIsEditing(false);
     setTask("");
-    await axios.post("http://localhost:5000/update-task", {
-      updatedId,
-      updatedTask,
+    setUpdatedTask(task);
+    
+    axios.post("http://localhost:5000/update-task", {updatedId, task,}).then((res)=> {
+      setTodos(res.data);
     });
   };
 
