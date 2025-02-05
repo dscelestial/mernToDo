@@ -28,6 +28,18 @@ const Home = () => {
     });
   }, []);
 
+  useEffect( () => {
+    const dummyData = async () => {
+      try{
+        const result = await axios.get("https://reqres.in/api/users/2");
+        console.log(result.data.data.email);
+      } catch(error){
+        console.log(error);        
+      }
+    } 
+    dummyData();
+  }, []);
+
   const handleEdit = (id, task) => {
     setTask(task);
     setIsEditing(true);

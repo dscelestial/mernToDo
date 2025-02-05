@@ -7,7 +7,14 @@ const db = mysql.createConnection({
     database: 'merntodo'
 });
 
-db.connect;
+db.connect((err) => {
+    if(!err){
+        console.log("Database is connected");
+    }
+    else{
+        console.log(err);   
+    }
+});
 
 export const getTask = (req, res) => {
     const q = 'SELECT * from merntodo';
