@@ -31,14 +31,17 @@ const Home = () => {
   useEffect( () => {
     const dummyData = async () => {
       try{
-        const result = await axios.get("https://reqres.in/api/users/2");
-        console.log(result.data.data.email);
+        const result = await axios.post("https://reqres.in/api/users", {
+          "name": `${task}`,
+          "job": "Task!",
+        });
+        console.log(result.data);
       } catch(error){
         console.log(error);        
       }
     } 
     dummyData();
-  }, []);
+  }, [task]);
 
   const handleEdit = (id, task) => {
     setTask(task);
