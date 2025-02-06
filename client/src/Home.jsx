@@ -8,7 +8,6 @@ const Home = () => {
   const [todos, setTodos] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedId, setUpdatedId] = useState("");
-  // const [updatedTask, setUpdatedTask] = useState("");
 
   const handleClick = (tabNumber) => {
     setTab(tabNumber);
@@ -28,21 +27,6 @@ const Home = () => {
     });
   }, []);
 
-  // useEffect( () => {
-  //   const dummyData = async () => {
-  //     try{
-  //       const result = await axios.post("https://reqres.in/api/users", {
-  //         "name": `${task}`,
-  //         "job": "Task!",
-  //       });
-  //       console.log(result.data);
-  //     } catch(error){
-  //       console.log(error);        
-  //     }
-  //   } 
-  //   dummyData();
-  // }, [task]);
-
   const handleEdit = (id, task) => {
     setTask(task);
     setIsEditing(true);
@@ -52,7 +36,6 @@ const Home = () => {
   const handleUpdate = async () => {
     setIsEditing(false);
     setTask("");
-    // setUpdatedTask(task);
     
     axios.post("http://localhost:5000/update-task", {updatedId, task,}).then((res)=> {
       setTodos(res.data);
