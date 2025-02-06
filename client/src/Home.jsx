@@ -8,7 +8,7 @@ const Home = () => {
   const [todos, setTodos] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedId, setUpdatedId] = useState("");
-  const [updatedTask, setUpdatedTask] = useState("");
+  // const [updatedTask, setUpdatedTask] = useState("");
 
   const handleClick = (tabNumber) => {
     setTab(tabNumber);
@@ -47,18 +47,24 @@ const Home = () => {
     setTask(task);
     setIsEditing(true);
     setUpdatedId(id);
-    setUpdatedTask(task);
   };
 
   const handleUpdate = async () => {
     setIsEditing(false);
     setTask("");
-    setUpdatedTask(task);
+    // setUpdatedTask(task);
     
     axios.post("http://localhost:5000/update-task", {updatedId, task,}).then((res)=> {
       setTodos(res.data);
     });
   };
+
+  const handleDelete = async (id) => {
+    console.log("Task deleted", id);
+    axios.post("http://localhost:5000/delete-task", {id}).then( (res) => {
+      setTodos(res.data);
+    });
+  }
 
   return (
     <div className="bg-gray-50 w-screen h-screen flex justify-center items-center">
@@ -129,15 +135,10 @@ const Home = () => {
                 </p>
               </div>
               <div className="flex flex-col items-start space-y-2">
-                <button
-                  onClick={() => {
-                    handleEdit(todo.id, todo.task);
-                  }}
-                  className="text-blue-600 hover:text-blue-800 cursor-pointer"
-                >
+                <button onClick={() => { handleEdit(todo.id, todo.task)}} className="text-blue-600 hover:text-blue-800 cursor-pointer">
                   Edit
                 </button>
-                <button className="text-red-600 hover:text-red-800 cursor-pointer">
+                <button onClick={() => {handleDelete(todo.id)}} className="text-red-600 hover:text-red-800 cursor-pointer">
                   Delete
                 </button>
                 <button className="text-green-600 hover:text-green-800 cursor-pointer">

@@ -65,3 +65,24 @@ export const updateTask = (req, res) => {
         }
     });
 };
+
+export const deleteTask = (req, res) => {
+    console.log(req.body);
+    const q = 'DELETE FROM merntodo WHERE id = ?';
+    db.query(q, [req.body.id], (err, result) => {
+        if(err){
+            console.log(err);
+        }else{
+            console.log("Task Deleted");
+            const updatedTasks = 'SELECT * FROM merntodo';
+            db.query(updatedTasks, (error, updatedResult) => {
+                if (error) {
+                    console.log(error);
+                    return res.status(500).send("Error retrieving tasks.");
+                } else {
+                    res.send(updatedResult);
+                }
+            });
+        }
+    })
+}
