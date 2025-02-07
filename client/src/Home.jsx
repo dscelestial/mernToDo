@@ -8,7 +8,6 @@ const Home = () => {
   const [todos, setTodos] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedId, setUpdatedId] = useState("");
-  const [isComplete, setIsComplete] = useState("ACTIVE");
 
   const handleClick = (tabNumber) => {
     setTab(tabNumber);
@@ -51,7 +50,6 @@ const Home = () => {
   }
 
   const handleComplete = async (id, status) => {
-    setIsComplete("COMPLETED");
     console.log("completed", id, status);
     try{
       await axios.post("http://localhost:5000/complete-task", {id, status});
