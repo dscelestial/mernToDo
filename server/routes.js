@@ -86,3 +86,24 @@ export const deleteTask = (req, res) => {
         }
     })
 }
+
+export const completeTask = (req, res) => {
+    console.log(req.body);
+    const q = 'UPDATE merntodo set status = ? WHERE id = ?';
+    db.query(q, ['COMPLETED', req.body.id], (err, result) => {
+        if(err){
+            console.log(err);
+        } else {
+            console.log("Task completed");
+            const updatedTasks = 'SELECT * FROM merntodo';
+            db.query(updatedTasks, (error, updatedResult) => {
+                if (error) {
+                    console.log(error);
+                    return res.status(500).send("Error retrieving tasks.");
+                } else {
+                    res.send(updatedResult);
+                }
+            });
+        }
+    })
+}

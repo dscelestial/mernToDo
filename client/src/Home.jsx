@@ -8,6 +8,7 @@ const Home = () => {
   const [todos, setTodos] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedId, setUpdatedId] = useState("");
+  const [isComplete, setIsComplete] = useState("ACTIVE");
 
   const handleClick = (tabNumber) => {
     setTab(tabNumber);
@@ -49,6 +50,16 @@ const Home = () => {
     });
   }
 
+  const handleComplete = async (id, status) => {
+    setIsComplete("COMPLETED");
+    console.log("completed", id, status);
+    try{
+      await axios.post("http://localhost:5000/complete-task", {id, status});
+    } catch(error){
+      console.log(error);
+    }
+  }
+
   return (
     <div className="bg-gray-50 w-screen h-screen flex justify-center items-center">
       <div className="w-full max-w-lg p-6 bg-white rounded-lg shadow-lg">
@@ -73,35 +84,24 @@ const Home = () => {
         </div>
 
         <div className="flex justify-evenly mb-6">
-          <p
-            className={`${
-              tab === 1 ? "text-blue-600 underline" : "text-gray-600"
-            } cursor-pointer hover:text-blue-600`}
-            onClick={() => handleClick(1)}
-          >
+          <p className={`${tab === 1 ? "text-blue-600 underline" : "text-gray-600"} cursor-pointer hover:text-blue-600`}
+            onClick={() => handleClick(1)}>
             All
           </p>
           <p
-            className={`${
-              tab === 2 ? "text-blue-600 underline" : "text-gray-600"
-            } cursor-pointer hover:text-blue-600`}
-            onClick={() => handleClick(2)}
-          >
+            className={`${tab === 2 ? "text-blue-600 underline" : "text-gray-600"} cursor-pointer hover:text-blue-600`}
+            onClick={() => handleClick(2)}>
             Active
           </p>
-          <p
-            className={`${
-              tab === 3 ? "text-blue-600 underline" : "text-gray-600"
-            } cursor-pointer hover:text-blue-600`}
-            onClick={() => handleClick(3)}
-          >
+          <p className={`${tab === 3 ? "text-blue-600 underline" : "text-gray-600"} cursor-pointer hover:text-blue-600`}
+            onClick={() => handleClick(3)}>
             Completed
           </p>
         </div>
 
         {todos.map((todo) => (
           <div key={todo.id} className="space-y-4">
-            <div className="flex justify-between bg-gray-50 p-4 rounded-md shadow-sm mb-2">
+            <div className="flex justify-between bg-blue-50 p-4 rounded-md shadow-sm mb-2">
               <div>
                 <p className="text-lg font-semibold">{todo.task}</p>
                 <p className="text-sm text-gray-500">
@@ -114,7 +114,7 @@ const Home = () => {
                       : "text-gray-500"
                   }`}
                 >
-                  Status: {todo.status}
+                  Status: {todo.status === isComplete ? "ACTIVE" : "COMPLETED"}
                 </p>
               </div>
               <div className="flex flex-col items-start space-y-2">
@@ -124,7 +124,7 @@ const Home = () => {
                 <button onClick={() => {handleDelete(todo.id)}} className="text-red-600 hover:text-red-800 cursor-pointer">
                   Delete
                 </button>
-                <button className="text-green-600 hover:text-green-800 cursor-pointer">
+                <button onClick={() => {handleComplete(todo.id, todo.status)}} className="text-green-600 hover:text-green-800 cursor-pointer">
                   Completed
                 </button>
               </div>
