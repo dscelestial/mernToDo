@@ -6,6 +6,8 @@ const Home = () => {
   const [tab, setTab] = useState(1);
   const [task, setTask] = useState("");
   const [todos, setTodos] = useState([]);
+  const [activeTodos, setActiveTodos] = useState([]);
+  const [completedTodos, setCompletedTodos] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedId, setUpdatedId] = useState("");
 
