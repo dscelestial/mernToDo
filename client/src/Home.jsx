@@ -52,7 +52,8 @@ const Home = () => {
   const handleComplete = async (id, status) => {
     console.log("completed", id, status);
     try{
-      await axios.post("http://localhost:5000/complete-task", {id, status});
+      const res = await axios.post("http://localhost:5000/complete-task", {id, status});
+      setTodos(res.data)
     } catch(error){
       console.log(error);
     }
