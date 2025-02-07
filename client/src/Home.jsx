@@ -114,7 +114,7 @@ const Home = () => {
                       : "text-gray-500"
                   }`}
                 >
-                  Status: {todo.status === isComplete ? "ACTIVE" : "COMPLETED"}
+                  Status: {todo.status}
                 </p>
               </div>
               <div className="flex flex-col items-start space-y-2">
